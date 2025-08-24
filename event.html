@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zentra'25 Events</title>
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        background: #0a0f1a; 
+        color: #e0e0e0;
+        overflow-x: hidden;
+      }
+      
+      nav {
+        background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+        padding: 15px;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+        transition: color 0.3s;
+      }
+      nav a:hover {
+        color: #00ffcc;
+        text-shadow: 0 0 10px #00ffcc;
+      }
+      
+      .hero {
+        text-align: center;
+        padding: 40px 20px;
+        background: url('image/robs-HOrhCnQsxnQ-unsplash.jpg') no-repeat center/cover;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        color: white;
+        overflow: hidden;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        top:0;left:0;right:0;bottom:0;
+        background: rgba(0,0,0,0.6);
+      }
+      .hero h1 {
+        position: relative;
+        z-index: 1;
+        font-size: 3rem;
+        text-shadow: 0 0 15px #00ffcc;
+        animation: glow 2s infinite alternate;
+      }
+      .hero h4{
+        position: relative;
+        z-index: 1;
+        font-size: 1rem;
+        text-shadow: 0 0 15px #00ffcc;
+        animation: glow 2s infinite alternate;
+      }
+      @keyframes glow {
+        from { text-shadow: 0 0 10px #00ffcc; }
+        to { text-shadow: 0 0 25px #00ffcc, 0 0 40px #0066ff; }
+      }
+      
+      .keyword {
+        position: relative;
+        display: inline-block;
+        font-weight: bold;
+        color: #00ffcc;
+      }
+      @keyframes moveRight {
+        from { transform: translateX(-120%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes moveLeft {
+        from { transform: translateX(120%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      
+      .events-section {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .section-title {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #00ffcc;
+        text-shadow: 0 0 10px #00ffcc;
+      }
+      
+      .events-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+      }
+      
+      .event-card {
+        background: linear-gradient(135deg, rgba(0,255,204,0.08), rgba(0,102,204,0.15));
+        border-radius: 15px;
+        padding: 25px;
+        backdrop-filter: blur(12px);
+        margin-bottom: 20px;
+        margin-top: 10px;
+        border: 1px solid rgba(0,255,204,0.3);
+        box-shadow: 0 4px 25px rgba(0,255,204,0.25);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .event-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 35px rgba(0,255,204,0.45);
+      }
+      .event-card h3 {
+        margin-top: 0;
+        color: #00ffcc;
+      }
+      .event-card h4 {
+        margin-bottom: 8px;
+        color: #66d9ff;
+      }
+      .event-card ul {
+        margin: 10px 0 20px 20px;
+      }
+      .event-card button {
+        background: linear-gradient(90deg,#00ffcc,#0066ff);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s, transform 0.3s;
+      }
+      .event-card pre {
+        padding: 10px;
+        border-radius: 8px;
+        background: rgba(0,0,0,0.4);
+        color: #e0e0e0;
+        margin-bottom: 10px;
+        white-space: pre-wrap;
+        font-size: 14px;
+      }
+      .event-card button:hover {
+        transform: scale(1.05);
+        background: linear-gradient(90deg,#00e6b8,#005ce6);
+        box-shadow: 0 0 12px #00ffcc;
+      }
+      
+      /* res mobile */
+      @media (max-width: 768px) {
+        .hero h1 { font-size: 2rem; }
+        .section-title { font-size: 1.5rem; }
+        .event-card { padding: 18px; }
+        .event-card h3 { font-size: 1.2rem; }
+      }
+      @media (max-width: 768px) {
+        .event-card pre {
+          white-space: pre-line;
+          font-size: 13px;       
+          line-height: 1.4;      
+        }
+      }
+      /*Cloud - Badge Rsponsive*/
+      .cloud-badge {
+        position: fixed;
+        right: 40px;
+        left:auto;
+        bottom: 40px;
+        width: 160px;
+        height: 100px;
+        background: linear-gradient(135deg, #ff4b2b, #ffcc00);
+        border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #101820;
+        font-weight: bold;
+        text-align: center;
+        font-size: 14px;
+        z-index: 10000;
+        cursor: pointer;
+        animation: cloud-glow 2s infinite alternate ease-in-out;
+        box-shadow: 0 0 20px rgba(255,200,0,0.7);
+      }
+      
+      .cloud-badge span {
+        font-family: Arial, sans-serif;
+        line-height: 1.2;
+      }
+      @media (max-width: 768px) {
+        .cloud-badge {
+          left: auto;
+          right: 20px;
+          bottom: 20px;
+        }
+      
+        .cloud-badge span {
+          left: auto;
+          right: 20px;
+          bottom: 20px;
+        }
+      }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="event.html">Events</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="hero">
+    <h1><span class="keyword">Zentra'25</span> - Event Details</h1>
+    <h4>Opt for One Technical and One Non-Technical</h4>
+  </div>
+
+  <div class="events-section">
+    <h2 class="section-title">Technical Events</h2>
+
+    <div class="event-card">
+      <h3>SynapCode</h3>
+      <h4>Description:</h4>
+      <p>A two-round challenge to test logical thinking, programming expertise, and problem-solving speed. Round 1 features MCQ-based quiz on logic, C, Python and Java. Round 2 is a hands-on coding round where participants showcase real problem-solving skills. Compete, code, and conquer!</p>
+      <h4>Event Rounds</h4>
+      <pre>Round 1 (Quiz) 
+        <strong>Topics:</strong> Basic and Advanced Programming Concepts, Finding Error and Outputs in <Strong>C, Java , Python</Strong>
+        <strong>Duration: 20-30 Minutes </strong> 
+        <strong>Marking Scheme: </strong>[ No Negative Marks ]
+        Top <b>15</b> Scorers will advance to <b>Round 2</b>
+      </pre>
+      <pre>Round 2 (Coding)
+        <strong>Topics:</strong> Problem Statements will be provided along with sample Input and Output
+        Coding must be done in the <strong>Online Compiler Specified by the Organizers</strong>
+        <strong>Duration: 45-60 Minutes </strong> 
+        <strong>Marking Scheme: </strong>[ Correctness of Output, Code Efficiency, Logical Approach ]
+      </pre>
+      <h4>Rules & Regulations:</h4>
+      <ul>
+        <li>Individual participation only.</li>
+        <li>Participants must remain in <strong>Full screen mode</strong> during the event</li>
+        <li>Use of Ai tools [ChatGPT , Copilot, Gemini], Switching tabs or Seeking External help is strictly prohibited</li>
+        <li><strong>Mobile phone, External notes</strong> or <strong> Pre-written code</strong> are not allowed</li>
+        <li>If any malpractice is detected the participate will be <Strong>Immediately disqualified</Strong> and will not be considered for the next round</li>
+        <li>The decision of the judges/Organizers is <strong>final and binding</strong></li>
+      </ul> 
+      <h4>Requirements:</h4>
+      <ul>
+        <li>Laptop with code editor installed.</li>
+        <li>Organizers provide systems for Individual based on Availibility</li>
+      </ul>
+      <button onclick="window.open('https://forms.gle/jpDB4djd1DatwzWF7')">Register</button>
+    </div>
+
+    <div class="event-card">
+      <h3>Figma Forge</h3>
+      <h4>Description:</h4>
+      <p>A creative challenge where participants use Figma to design user-friendly and innovative interfaces. Show your UI/UX skills, build interactive prototypes, and impress the judges with your creativity, clarity, and design thinking!Show your creativity with UI/UX design using Figma! Participants will design and present a prototype or creative solution based on the given theme.</p>
+      <h4>Events Round</h4>
+      <pre>Round 1: Rapid Design Challenge
+        <strong>Theme/Prompt </strong>will be given (e.g., design a landing page, mobile app screen or poster).
+        <strong>Duration: </strong>20 Minutes
+        <strong>Evaluvation Criteria:</strong>
+        1. Exact Replication of given design (i.e., color, font, design size).
+        2. Design must be submitted within the given time.
+        <strong>Top Score will Qualify for Round 2</strong>
+      </pre>
+      <pre>Round 2: Full Design Round
+        Participants will be given a details design problem (e.g., Create a mobile app prototype for a food delivery app).
+        <strong>Duration: </strong>45 Minutes
+        <strong>Evaluvation Criteria:</strong>
+        1. Completeness of the design (wireframes , components, flow).
+        2. Designs must be submitted within the given time.
+      </pre>
+      <h4>Rules & Regulations:</h4>
+      <ul>
+        <li>The Event is for <strong>Team Participants</strong> (two members per team)</li>
+        <li>Internet Access will be limited to FIgma and approved design resources (no external assests unless permitted).</li>
+        <li>Use of AI tools (ChatGPT , Copilot etc.), pre-made templates, or copying exsiting design is <strong> Strictly prohibited.</strong></li>
+        <li>Any form of <strong>Malpractice</strong>(AI Usage, plagiarism, misconduct or rule violation) will lead to Immediately disqualified.</li>
+        <li>The decision of the judges/organizers is final and binding.</li>
+      </ul>
+      <h4>Requirements:</h4>
+      <ul>
+        <li>Their own Laptop with Figma installed / Browser Access  (or)</li>
+        <li>The systems will provided by the Organizers</li>
+      </ul>
+      <button onclick="window.open('https://forms.gle/jpDB4djd1DatwzWF7')">Register</button>
+    </div>
+
+    <div class="event-card">
+      <h3>Purpl3 OP5 CTF 2025 - Where Red Meets Blue</h3>
+      <h4>Description:</h4>
+      <p>Welcome to Purple Ops CTF, a one-of-a-kind cybersecurity competition designed to test your skills across both offensive (Red Team) and defensive (Blue Team) domains.
+      </p>
+      <p>This isn’t your typical CTF—every round is crafted to simulate real-world challenges that security professionals face daily. From spotting traces in logs to tearing apart malware, from dissecting network traffic to full-blown system exploitation—you’ll face it all here.
+      </p>
+      <h4>Event Rounds:</h4>
+      <pre><strong>Round 1-Jeopardy-style challenges:</strong>
+      OSINT, CRYPTOGRAPHY, WEB EXPLOITATION, REVERSE ENGINEERING, PCAP ANALYSIS, LOG ANALYSIS, MALAWARE ANALYSIS</pre>
+      <pre><strong>Round 2-Boot to Root</strong>
+      Put it all together: exploit a vulnerable machine, pivot like a real attacker, and escalate all the way to root.</pre>
+      <h4>Rules & Regulations:</h4>
+      <ul>
+        <li> Flag Format → PURPL3{something_here}</li>
+        <li>Each player can participate in only one team.</li>
+        <li>Strictly prohibited:
+
+          Attacks on the Purpl3 0p5 platform or other participants.
+          
+          Flag sharing between teams.
+          
+          Brute-force or automated submissions.</li>
+        <li> Points are awarded per challenge; ties are broken by submission time.
+        </li>
+        <li>Using hints may reduce challenge points.</li>
+        <li>Rule violations = Immediate disqualification.</li>
+      </ul>
+      <h4>Requirements:</h4>
+      <ul>
+        <li>A laptop/PC with Linux or Windows OS.</li>
+        <li>Stable internet connection.</li>
+        
+      </ul>
+      <button onclick="window.open('https://forms.gle/jpDB4djd1DatwzWF7')">Register</button>
+    </div>
+
+    <div class="event-card">
+      <h3>FOR3N6: Case Study Presentation</h3>
+      <h4>Description:</h4>
+      <p>Showcase your analytical and investigative skills by solving real-world cyber forensic cases. Present your findings with clarity, evidence, and strategy. A platform to test technical knowledge, reasoning, and presentation skills in the world of digital forensics.</p>
+      <h4>Instruction:</h4>
+      <ul>
+        <li><strong>Pair of Participants:</strong> Each team will consists of two participants.</li>
+        <li><strong>Presentation Topics:</strong> Analysis must be focused on cybersecurity breaches.</li>
+        <li><strong>Analysis Time Period:</strong>Confirm that the subject mater is relevant to the present timeframe.</li>
+        <li><strong>Allocation Duration:</strong> The presentation should be completed within 5 -7 Minutes</li>
+        <li><strong>Presentation deck:</strong> Each team should prepare 6 - 7 Slides.</li>
+      </ul>
+      <h4>The Recommended Outline For This Presenation:</h4>
+      <ul>
+        <li><strong>Title:</strong> The name of the case.</li>
+        <li><strong>Incident Overview:</strong> A summary of what occured.</li>
+        <li> <strong>Cause/Sequence: </strong>Explanation of how it unfolded / initiated.</li>
+        <li><strong>Impact/Consequences: </strong>The effects or impact of the incident.</li>
+        <li><strong>Resolution/Steps Taken: </strong>The actions taken to address the issue.</li>
+        <li><strong>Preventive Measures & Key Insights: </strong>Risk reduction steps and lessons learned.</li>
+
+      </ul>
+      <h4>Requirements:</h4>
+      <ul>
+        <li>PPT file in USB or Send to Email.</li>
+      </ul>
+      <button onclick="window.open('https://forms.gle/jpDB4djd1DatwzWF7')">Register</button>
+    </div>
+    <!-- Work Shop -->
+    <div class="event-card">
+      <h3>AI-SECUR3 </h3>
+      <p class="tagline">Where Artificial Intelligence Meets Cyber Security</p>
+      <p><strong>Date:</strong> September 16, 2025</p>
+      <p><strong>Time:</strong> 10:30 AM – 12:30 PM</p>
+      <p><strong>Venue:</strong> PG Conference Hall</p>
+    
+      <h4>About the Workshop</h4>
+      <ul>
+        <li>AI-SECUR3 is a cutting-edge cybersecurity workshop where Artificial Intelligence meets Cyber Defense.</li>
+        <li>Discover how AI can think like hackers yet defend like guardians, reshaping the future of digital security.</li>
+      </ul>
+    
+      <h4>Why Attend?</h4>
+      <ul>
+        <li>Learn AI-powered cybersecurity fundamentals</li>
+        <li>Explore real-world case studies & demos</li>
+        <li>Discover threat detection and prevention strategies</li>
+        <li>Network with peers & gain a certificate of participation</li>
+      </ul>
+    
+      <h4>Expert Speaker</h4>
+      <p><strong>Speaker:</strong> Ms. Sarika Ravindran</p>
+      <ul>
+        <li>15+ years of industry experience</li>
+        <li>Specialist in C, C++, Embedded Systems, AGILE</li>
+        <li>Six Sigma Green Belt Certified</li>
+        <li>Mentor in secure system design & emerging technologies</li>
+      </ul>
+    
+      <h4>Participation Guidelines</h4>
+      <ul>
+        <li>Register early – seats are limited to 60 (first-come, first-serve)</li>
+        <li>Be on time and stay engaged for the full workshop</li>
+        <li>Maintain a professional & respectful atmosphere</li>
+        <li>All participants will receive a Certificate of Participation</li>
+        <li>Bring a notebook & pen for notes (laptop optional)</li>
+        <li>Reference materials & resources will be shared by the organizers</li>
+      </ul>
+    
+      <h4>Registration</h4>
+      <p><strong>Limited to 60 seats – First Come, First Serve</strong></p>
+      <p><strong>Registration Fee:</strong> ₹250 (Workshop Add-on: +₹50)</p> <br>
+    
+      <button class="register-btn" onclick="window.open('https://forms.gle/jpDB4djd1DatwzWF7')">
+        Register Now
+      </button>
+    </div>
+    
+    
+  </div>
+
+  </div>
+  <!-- non tech Event -->
+  <div class="events-section">
+    <h2 class="section-title" id="nontechnical">Non-Technical Events</h2>
+
+    <div class="event-card">
+      <h3>PopCorn puzzles</h3>
+      <p>Guess the songs from short clips and prove your music knowledge.</p>
+      <h4>Event Round</h4>
+      <pre>Round 1 Movie quiz(bioscope):
+        15 questions
+      </pre>
+      <pre>Round 2 Song Quiz
+        15 questions
+      </pre>
+      <h4>Rules & Regulations:</h4>
+      <ul>
+        <li>Only two participants per team</li>
+        <li><strong>Duration: </strong>45 Minutes per event</li>
+        <li><strong>Eligibility Criteria: </strong>First round is common event</li>
+        <li><strong>Points: </strong>Score based on their answers</li>
+        <li><strong>2<sup>nd</sup> is (Final round)</strong> Top 10 Teams. <strong>Best 2  as a winner</strong></li>
+      </ul>
+      <h4 style="color: yellow;">  Gift card is Provided For Winners</h4>
+      <h4>Requirements:</h4>
+      <ul>
+        <li>Just your ears and team spirit!</li>
+      </ul>
+      <button onclick="window.open('https://forms.gle/jpDB4djd1DatwzWF7')">Register</button>
+    </div>
+<!-- MEME EVENET -->
+    <div class="event-card">
+      <h3>MEMETRIX</h3>
+      <h4>Description:</h4>
+      <p>Memetrix is a non-technical, laughter-filled event where memes take center stage. Teams or solo participants battle it out across three wildly fun rounds, each designed to test wit, creativity, and speed—all without a single line of code.</p>
+      <p>Showcase your meme creation skills on given topics.</p>
+      <h4>Event Round:</h4>
+      <pre><strong>Round 1:
+        Trending meme templates on social media will be displayed, the participants has to find the answers for the questions asked.
+      </strong></pre>
+      <pre><strong>Round 2:</strong>
+        Organizers will display a template or gifs  from a movie, and the participants must guess the answers correctly. 
+      </pre>
+      <pre><strong>Round 3:</strong>
+        The third and final round consist of displaying series of images to let the participants find out the answers,Which the images describe. 
+      </pre>
+      <h4>Rules & Regulations:</h4>
+      <ul>
+        <li><Strong>Eligibility:</Strong> Open to all registered participants(20 - 25 teams). Every team will be consist of 2 members.</li>
+        <li>No External Help (Google, AI , Friends)</li>
+        <li>No Shouting answers unless it's buzzer round.</li>
+        <li>wrong answer do not eliminate you unless Specified</li>
+      </ul>
+      <h4 style="color: yellow;">  Gift card is Provided For Winners</h4>
+      <h4>Requirements:</h4>
+      <ul>
+        <li>Note pen Will Provided by the Organizers</li>
+      </ul>
+      <button onclick="window.open('https://forms.gle/jpDB4djd1DatwzWF7')">Register</button>
+    </div>
+
+    <!-- IPL AUCTION -->
+    <div class="event-card">
+      <h3>Stumps and Stakes</h3>
+      <h4>Description:</h4>
+      <p>Step into the shoes of a franchise owner! Build your dream cricket team by smart bidding and strategy within budget limits. Test your decision-making, teamwork, and cricket knowledge. Exciting, competitive, and fun—only the sharpest team managers will win big!.</p>
+      <h4>Event Round:</h4>
+      <pre><strong>Round 1:</strong> IPL Quiz Format 
+        Round 1 is a knockout quiz competition where teams answer questions related to IPL matches and players to test their cricket knowledge.
+        <strong>Top 8 Selection</strong> :Only the top 8 teams from the quiz round advance to Round 2, based on their performance in the knockout format.</pre>
+      <pre><strong>Round 2:</strong>Bidding Auction
+        The top 8 teams from Round 1 are assigned virtual money and IPL team names to bid for players in an   auction, following specific bidding rules provided during the event.  
+        <strong>Squad Building:</strong> Teams strategically bid to build balanced squads within their budget, adhering to IPL auction rules like player categories (capped/uncapped) and maximum squad size</pre>
+      <h4>Rules & Regulations:</h4>
+      <ul>
+        <li>Total number of teams for the event (20 teams) </li>
+        <li>Each team will consist of 2 participants </li>
+      </ul>
+      <h4 style="color: yellow;">  Gift card is Provided For Winners</h4>
+      <h4>Requirements:</h4>
+      <ul>
+        <li>Note , pen will be provided by the Organizers</li>
+      </ul>
+      <button onclick="window.open('https://forms.gle/jpDB4djd1DatwzWF7')">Register</button>
+    </div>
+<!-- TRAIN CHALLENGE -->
+    <div class="event-card">
+      <h3>Subway Actors</h3>
+      <h4>Description:</h4>
+      <p>An exciting team-based fun game designed to test speed, coordination, and teamwork! A word/phrase is given to the first member, and must be passed only through actions (no speech/devices). Teams of 4–5, 5 mins total. Break rules = elimination. Winners get   gift cards!</p>
+      <h4>About the Game:</h4>
+      <ul>
+        <li>Team members should stand one after another in an line.</li>
+        <li>A word or statement is passed to the first person in the line.</li>
+        <li>They should convey the word or statement in action.</li>
+      </ul>
+      <h4>Rules & Regulations:</h4>
+      <ul>
+        <li>Team of 4 to 5 members.</li>
+        <li>Total Allocation time per team is 5 min</li>
+        <li>1 Min is allocated to pass the work through actions.</li>
+        <li>Should not convey the word or statement in oral form</li>
+        <li>Shouldn't use any electric and electronic devices in the game.</li>
+        <li>If any Team Members break the rules team will be eliminate.</li>
+      </ul>
+      <h4 style="color: yellow;">  Gift card is Provided For Winners</h4>
+      <h4>Requirements:</h4>
+      <ul>
+        <li>Enthusiasm and teamwork!</li>
+      </ul>
+      <button onclick="window.open('https://forms.gle/jpDB4djd1DatwzWF7')">Register</button>
+    </div>
+  </div>
+  <div class="cloud-badge">
+    <span>Prize Worth! <br>₹15,000/-</span>
+  </div>
+  <script>
+    document.querySelector(".cloud-badge").onclick = function() {
+      document.getElementById("popup").classList.add("active");
+    }
+    window.onload = function(){
+      const keywords = document.querySelectorAll('.keyword');
+      keywords.forEach((word, index) => {
+        word.style.animation = (index % 2 === 0) 
+          ? "moveRight 1s ease-out forwards" 
+          : "moveLeft 1s ease-out forwards";
+        word.style.animationDelay = (index * 0.5) + "s";
+      });
+    }
+  </script>
+</body>
+</html>

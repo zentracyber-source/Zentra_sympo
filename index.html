@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zentra'25 Symposium</title>
+  <style>
+    footer{
+      width: 100%;
+      color: white;
+      border-top:2px solid white;
+      text-align: center;
+      background-color: black;
+      padding-bottom: 10px;
+      border-bottom: 2px solid white;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      box-sizing: border-box;
+      background: url('image/gradient-technology-background.jpg');
+    }
+
+    .navbar {
+      width: 100%;
+      background: rgba(10, 15, 30, 0.95);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+    
+    .logo {
+      color: #fff;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    
+    /* ✅ Nav Links Default (Laptop) */
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+      margin-right: 20px;
+    }
+    
+    .nav-links li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 8px 15px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-links li a:hover {
+      background: linear-gradient(135deg, #00f5ff, #00ffcc);
+      color: #111;
+      box-shadow: 0 0 12px #00f5ff, 0 0 20px #00ffcc;
+    }
+    
+    /* ✅ Mobile View */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+      }
+    
+      .nav-links {
+        flex-direction: row;
+        gap: 12px;
+        margin-top: 10px;
+        width: 100%;
+      }
+    
+      .nav-links li a {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 10px;
+      }
+    }
+    /* Hero */
+    #hero{
+      background:url('image/gradient-technology-background.jpg') no-repeat center/cover;
+    }
+    .hero{height:85vh;;
+      display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;position:relative}
+    .hero::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5)}
+    .hero-content{position:relative;z-index:1}
+    .hero h1{font-size:3em;margin-bottom:10px}
+    .section:hover {
+      transform: translateY(-5px);
+    }
+     
+    
+    .hero h1 {
+      font-size: 3rem;
+      animation: glow 2s infinite alternate;
+      text-shadow: 0 0 10px white;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 25px #00ffcc, 0 0 40px #0066ff; }
+    }
+    .hero p {
+      font-size: 1.8rem;
+      margin: 1rem 0;
+      color: white;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(135deg, #007BFF, #00C6FF);
+      color: black;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+    }
+    .btn1{
+        background-color: black;
+        color: white;
+    }
+    
+    .btn:hover {
+      background: linear-gradient(135deg, #0056b3, #0096c7); /* Darker gradient on hover */
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 123, 255, 0.6);
+    }
+
+    @keyframes slideText {
+      0% { transform: translateX(-20%); color: #00ffff; }
+      50% { transform: translateX(20%); color: #00ffff; }
+      100% { transform: translateX(-20%); color: #00ffff; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Sections styling with color palette */
+    .section {
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      margin: 2rem auto;
+      max-width: 1200px;
+      background: #111;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .section:hover {
+      transform: translateY(-5px);
+    }
+
+    /* About Boxes with different neon left borders */
+    .about-box {
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 12px;
+      border-left: 6px solid;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .about-box[data-accent="green"] { border-left-color: #00ff00; box-shadow: 0 6px 20px rgba(0,255,0,0.4); }
+    .about-box[data-accent="cyan"] { border-left-color: #00ffff; box-shadow: 0 6px 20px rgba(0,255,255,0.4); }
+    .about-box[data-accent="purple"] { border-left-color: #ff00ff; box-shadow: 0 6px 20px rgba(255,0,255,0.4); }
+    .about-box:hover { transform: translateY(-8px); }
+    .event-box, 
+  .agenda-box, 
+  .register-box, 
+  .official-box, 
+  .contact-box {
+    background: #1a1a1a;       
+    padding: 2rem;               
+    border-radius: 12px;         
+    border-left: 6px solid;     
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .sponsored{
+    padding: 2rem;
+    border-radius: 12px;
+    border-left:6px solid ;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .sponsored[data-accent="cyan"]{
+    border-left-color:white;
+    box-shadow: 0 6px 20px rgba(255,0,255,0.4);
+  }
+    /* Event, Agenda, Register, Officials, Contact Boxes with different neon colors */
+    .event-box[data-accent="purple"] { border-left-color: #ff00ff; box-shadow: 0 6px 20px rgba(255,0,255,0.4); }
+    .agenda-box[data-accent="yellow"] { border-left-color: #ffc400; box-shadow: 0 6px 20px rgba(255,196,0,0.4); }
+    .register-box[data-accent="orange"] { border-left-color: #ffa500; box-shadow: 0 6px 20px rgba(255,165,0,0.4); }
+    .official-box[data-accent="magenta"] { border-left-color: #00ffff; box-shadow: 0 6px 20px rgba(51, 222, 235, 0.4); }
+    .contact-box[data-accent="green"] { border-left-color: #00ff00; box-shadow: 0 6px 20px rgba(0,255,0,0.4); }
+    .event-box:hover, .agenda-box:hover, .register-box:hover, .official-box:hover, .contact-box:hover ,.sponsored:hover{
+      transform: translateY(-8px);
+    }
+    @media (max-width: 768px) {
+      .sponsored[data-accent="cyan"]{border-right:6px solid;border-right-color:white;border-left: 0;box-shadow: 0 6px 20px rgba(255,0,255,0.4);}
+      .register-box[data-accent="orange"]{border-right:6px solid;border-right-color:#ffa500;border-left: 0px;box-shadow: 0 6px 20px rgba(255,165,0,0.4);}
+      .event-box1[data-accent="purple"]{border-right: 6px solid;border-right-color:#ff00ff;border-left:0pc;box-shadow: 0 6px 20px rgba(255,0,255,0.4);}
+      .official-box1[data-accent="magenta"]{border-right:6px solid;border-right-color:#00ffff;border-left: 0px;box-shadow:rgba(0,255,0,0.4);}
+      .about-box[data-accent="cyan"]{border-right:6px solid;border-right-color:#00ffff;border-left: 0px;box-shadow:rgba(0,255,255,0.4);}
+    
+    }
+    /* Grid layouts */
+    .event-grid, .about-container, .agenda-register-grid, .officials-container, .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Text and headings */
+    h2, h3 { color: #00ffff; }
+    p, li { color: #cccccc;  }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.1rem; }
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .about-box p, .about-box ul li { font-size: 0.9rem; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.6rem; }
+      .hero p { font-size: 0.9rem; }
+      .about-box p, .about-box ul li { font-size: 0.8rem; }
+    }
+    /* Global Dark Blue Background */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #0a0f1e; /* Dark blue tone */
+    color: #f4f4f4;
+  }
+  
+  /* Universal Inner Div Styling */
+  .about-box, 
+  .event-box, 
+  .agenda-box, 
+  .register-box, 
+  .official-box, 
+  .contact-box {
+    background: #101b33; /* Slightly lighter dark blue for contrast */
+    padding: 2rem; /* Inner padding */
+    border-radius: 12px;
+    margin: 1rem 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Neon Box Shadows (different for each) */
+ 
+  
+  /* Hover Effects */
+  .about-box:hover,
+  .event-box:hover,
+  .agenda-box:hover,
+  .register-box:hover,
+  .official-box:hover,
+  .contact-box:hover {
+    transform: translateY(-6px);
+    box-shadow: -8px 0 20px rgba(0, 209, 255, 0.8);
+  }
+  .sponsored:hover{
+    box-shadow: -8px 0 20px white;
+  }
+  
+  /* Section Titles */
+  h2, h3 {
+    text-shadow: 0 0 8px rgba(0, 209, 255, 0.6);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .about-box, 
+    .event-box, 
+    .agenda-box, 
+    .register-box, 
+    .official-box, 
+    .contact-box {
+      padding: 1.2rem;
+      margin: 0.8rem 0;
+    }
+  }
+
+  .sponsored{
+    margin: 0 auto;
+    padding: 20px 100px;
+    width: max-content;
+    text-align: center;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+
+  }
+  .sponsored img{
+    border-radius: 30px;
+    border: 2px solid black;
+  }
+  .sponsored p{
+    text-align: center;
+  }
+  .deadline{
+    color:yellow;
+  }
+  #countdown{
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+  }
+  .cloud-badge {
+    position: fixed;
+    right: 40px;
+    left:auto;
+    bottom: 40px;
+    width: 160px;
+    height: 100px;
+    background: linear-gradient(135deg, #ff4b2b, #ffcc00);
+    border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #101820;
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+    z-index: 10000;
+    cursor: pointer;
+    animation: cloud-glow 2s infinite alternate ease-in-out;
+    box-shadow: 0 0 20px rgba(255,200,0,0.7);
+  }
+  
+  .cloud-badge span {
+    font-family: Arial, sans-serif;
+    line-height: 1.2;
+  }
+  
+  /* Glow Animation */
+  @keyframes cloud-glow {
+    0% {
+      box-shadow: 0 0 10px rgba(255, 200, 0, 0.6), 0 0 30px rgba(255, 80, 0, 0.6);
+    }
+    100% {
+      box-shadow: 0 0 25px rgba(255, 255, 0, 0.9), 0 0 50px rgba(255, 80, 0, 0.9);
+    }
+  }
+  
+  /* Popup Overlay */
+  .popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease, visibility 0.4s;
+  }
+  
+  /* Popup Content */
+  .popup-content {
+    background: #101820;
+    color: #00ffcc;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 255, 200, 0.8);
+    text-align: center;
+    max-width: 400px;
+    position: relative;
+    animation: popup-bounce 0.6s ease;
+  }
+  
+  /* Close Button */
+  .close-btn {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  /* Button */
+  .register-btn {
+    margin-top: 15px;
+    background: linear-gradient(135deg, #ff4b2b, #ffcc00);
+    color: #101820;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 200, 0, 0.8);
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s;
+  }
+  .register-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 200, 0, 1);
+  }
+  
+  /* Animation */
+  @keyframes popup-bounce {
+    0% { transform: scale(0.6); opacity: 0; }
+    80% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+  
+  /* Show Popup */
+  .popup-overlay.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  @media (max-width: 768px) {
+    .cloud-badge {
+      right: auto;
+      left: 20px;
+      bottom: 20px;
+    }
+    .sponsored{
+      text-align: center;
+      margin: 0 auto;
+      padding: 10px 20px;
+    }
+    .sponsored img{
+      width: 250px;
+      border-radius: 10px;
+    }
+    .cloud-badge span {
+      right: auto;
+      left: 20px;
+      bottom: 20px;
+    }
+  }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">⚡ Zentra'25 ⚡</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="event.html">Events</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    
+  </nav>
+
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1>Welcome to Zentra'25</h1>
+      <p>Organized by the Cyber Department</p>
+      <p style="color: rgb(233, 230, 74); font-size:15px;font-weight:bold;">Held On September 16<sup>th</sup></p>
+      <h4>Register Fee: 250/-- Rs</h4>
+      <a href="event.html" class="btn">Explore Events</a>
+    </div>
+  </section>
+
+  <section class="about-section glass section">
+    <div class="about-container">
+  
+      <div class="about-box" data-accent="green">
+        <h2>About the Symposium</h2>
+        <p>
+          <strong>Zentra’25 – An Annual Tech Extravaganza by the Cyber Department in KLNCE</strong><br><br>
+          The Department of Cyber Security proudly presents Zentra’25, the annual symposium that brings together aspiring innovators, young developers, problem-solvers, and creative thinkers from diverse domains of Engineering. Zentra is a celebration of technology, innovation, and collaboration, providing students a platform to showcase their skills, compete with like-minded peers, and gain insights from industry professionals.
+        </p>
+      </div>
+
+      <div class="about-box" data-accent="cyan">
+        <h2>Purpose of Zentra’25</h2>
+        <p>
+          In an age where technology is rapidly shaping the world, students need opportunities that go beyond classroom learning. Zentra’25 is designed to bridge the gap between academic knowledge and real-world problem-solving. It is a forum where students can apply their theoretical learning in practical contexts, collaborate in teams, and demonstrate their ability to think critically under time-bound challenges.
+        </p>
+        <p>Explore cutting-edge technologies in coding, web design, and cybersecurity.
+          Recognize both technical and non-technical talents.
+          Network with peers, alumni, faculty, and industry experts.
+          Drive innovation-focused projects that benefit society.
+        </p>
+      </div>
+  
+      <div class="about-box" data-accent="purple">
+        <h2>What Makes Zentra’25 Special?</h2>
+        <p>
+          Zentra’25 balances competitive technical events and engaging non-technical activities. Technical sessions enhance analytical and coding strengths, while non-technical events nurture creativity, teamwork, and quick thinking.
+        </p>
+        <p>
+          The event believes every student has a unique contribution—whether it’s debugging code, cracking CTF challenges, presenting cybersecurity research, or energizing the crowd through quizzes and fun challenges.
+        </p>
+      </div>
+  
+    </div>
+  </section>
+  <Section class="sponsored " data-accent="cyan">
+    <div>
+      <h3>SPONSORED BY, </h3>
+      <img src="image/Sponsored.jpg" alt="">
+      
+    </div>
+  </Section>
+
+  <section class="events section">
+    <h2>Event Highlights</h2>
+    <div class="event-grid">
+      
+      <a href="event.html#technical" class="event-box" data-accent="purple">
+        <h3>Technical Events</h3>
+        <ul>
+          <li>SnynapCode</li>
+          <li>Figma Forge</li>
+          <li>Purpl3 OP5</li>
+          <li>FOR3N6: Case Study Presentation</li>
+          
+        </ul>
+        <h3>WorkShop</h3>
+          <ul>
+            <li>AI with Security</li>
+          </ul>
+      </a>
+  
+      <a href="event.html#nontechnical" class="event-box event-box1" data-accent="purple">
+        <h3>Non-Technical Events</h3>
+        <ul>
+          <li>PopCorn Puzzle</li>
+          <li>Memetrix</li>
+          <li>Stumps and Stakes</li>
+          <li>Subway Actors</li>
+        </ul>
+      </a>
+  
+    </div>
+  </section>
+  
+  <section class="agenda-register section" >
+    <h2>Agenda & Registration</h2>
+  
+    <div class="agenda-register-grid">
+      
+      <!-- Event Agenda -->
+      <div class="agenda-box" data-accent="yellow">
+        <h3>Event Agenda</h3>
+        <p>Check out the detailed schedule of Zentra’25 events and sessions. Plan your participation and don't miss out on any exciting activity!</p>
+        <a href="#" target="" class="btn">
+          <img src="image/regsoon.png" alt="Agenda Preview" style="width:100%; border-radius:8px; ;">
+          View Full Agenda
+        </a>
+      </div>
+  
+      <!-- Registration Box -->
+      <div class="register-box" data-accent="orange">
+        <h3>Register Now</h3>
+        <p>Fill out the Google Form to participate in Zentra'25. Secure your spot today! <br>
+          <br>💰 Registration Fee: ₹250 <br>
+          🛠 If opted for Workshop → Additional ₹50
+        </p>
+        <a href="https://forms.gle/jpDB4djd1DatwzWF7" target="_blank" class="btn btn1">Register Here</a>
+        <p style="color:Green ;">Last Registration Date: September 12<sup>th</sup></p>
+        <p class="deadline">Last Date: <span id="countdown"></span></p>
+      </div>
+  
+    </div>
+  </section>
+  
+  <section class="officials section">
+    <h2>College Official Details</h2>
+    <div class="officials-container">
+
+      <div class="official-box" data-accent="magenta">
+        <h3>PRINCIPAL</h3>
+        <p>Dr.A.V.Ram Prasad (KLNCE)</p>
+        <h3>CONVENOR</h3>
+        <p>Dr.J.S.Kanchana (Prof & HOD/CSE(CS))</p>
+      </div>
+
+      
+
+      <div class="official-box official-box1" data-accent="magenta">
+        <h3>Staff Incharge</h3>
+        <ul>
+          <li>Mrs.T.Suganya (AP/CSE(CS))</li>
+          <li>Ms.S.Muthayee (AP/CSE(CS))</li>
+          <li>Mr.V.Vijay (AP/CSE(CS))</li>
+        </ul>
+      </div>
+
+      <div class="official-box" data-accent="magenta">
+        <h3>Student Incharge</h3>
+        <ul>
+          <li>Mirthun Jai.D - President</li>
+          <li>Vishnu Varshini.S - Vice President</li>
+          <li>Yoki Raj.S - Secretary</li>
+          <li>Tamil Ezhil.R - Joint Secretary</li>
+          <li>Lavanya.R - Treasurer</li>
+        </ul>
+      </div>
+      <!-- Any Doubt Ask me Dinesh Babu J J (dineshbabujj@gmail.com) (9750662601) -->
+    </div><center>
+    <section class="contact section" data-accent="green">
+      <h2>Contact Us</h2>
+      <p>Email: zentra.cyber@gmail.com</p>
+      <p>Phone: +91 70104 36575</p>
+    </section>
+  </center>
+  </section>
+
+  <footer>
+    <p>Last Date for Registration: September 12<sup>th</sup><span id="countdown"></span></p>
+    <p>&copy; 2025 Zentra'25 | Cyber Department</p>
+  </footer>
+  <div class="cloud-badge">
+    <span>Prize Worth! <br>₹15,000/-</span>
+  </div>
+  
+  <!-- Popup Modal -->
+  <div id="popup" class="popup-overlay">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">&times;</span>
+      <h2>ℹ️ Zentra'25 Symposium</h2>
+  
+      <p>Registration Fee: <strong>₹250</strong></p>
+      <p>Workshop Fee: <strong>Extra  ₹50</strong></p>
+      <p style="font-size: small;color:white;">(Includes Gifts,Food and Refreshments)</p>
+      
+      <button class="register-btn" onclick="window.location.href='https://forms.gle/jpDB4djd1DatwzWF7'">
+        Register Now
+      </button>
+    </div>
+  </div>
+  
+  <script>
+     document.querySelector(".cloud-badge").onclick = function() {
+      document.getElementById("popup").classList.add("active");
+    }
+    function closePopup() {
+      document.getElementById("popup").classList.remove("active");
+    }
+  
+    window.onload = function() {
+      setTimeout(() => {
+        document.getElementById("popup").classList.add("active");
+      }, 1000); 
+    } 
+  </script>
+  <script src="script.js">
+
+  </script>
+</body>
+</html>
